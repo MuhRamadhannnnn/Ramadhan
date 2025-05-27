@@ -1,0 +1,52 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+
+int	main(){
+	string n;
+	string p;
+	string password;
+	string username;
+	string totalharga;
+	string totalbarang;
+	int belanja;
+	double diskon;
+ string barang[]={"handuk","shampo","sabun","telor","snack","sayuran","odol","sikatgigi","pisang","semangka","pensil"};
+int hargabar[]={50000,15000,10000,1000,20000,15000,5000,1500,12000,16000,19900};
+
+	username = "admin";
+	password = "211";
+	
+	cout<<"Masukkan Username : ";
+	cin>>username;
+	cout<<"Masukkan Password : ";
+	cin>>password;
+	
+	if(username == "admin", password == "211"){
+		cout<<"Selamat anda telah masuk"<<endl;
+		}else {
+			cout<<"anda salah memasukan username dan password"<<endl;
+	}
+
+	system("cls");
+	cout<<"anda berhasil memasukan password"<<endl;
+	
+	for(int i = 0; i <= 10; i++){
+	
+			cout<<"Masukkan barang ke "<< i + 1 <<" : "<<barang[i];
+			cout<<endl;
+		}
+		for(int j = 0; j <= 10; j++){
+			cout<<"\nDengan harga : " <<hargabar[j];
+	
+	
+	
+		}
+	
+
+		}
+			
+		
+
+	
