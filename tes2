@@ -1,0 +1,147 @@
+import java.util.Scanner;
+
+// Superclass Manager
+class Manager {
+    String nama;
+    String departemen;
+    double gajiPokok;
+    
+    Manager(String nama, String departemen, double gajiPokok) {
+        this.nama = nama;
+        this.departemen = departemen;
+        this.gajiPokok = gajiPokok;
+    }
+    
+    double hitungGaji() {
+        return gajiPokok;
+    }
+    
+    void tampilkan() {
+        System.out.println("\n--- DATA KARYAWAN ---");
+        System.out.println("Nama       : " + nama);
+        System.out.println("Departemen : " + departemen);
+        System.out.println("Gaji Pokok : Rp " + gajiPokok);
+        System.out.println("Total Gaji : Rp " + hitungGaji());
+    }
+}
+
+// Subclass ManagerLevel
+class ManagerLevel extends Manager {
+    double bonus;
+    double tunjangan;
+    
+    ManagerLevel(String nama, String departemen, double gajiPokok, double bonus, double tunjangan) {
+        super(nama, departemen, gajiPokok);
+        this.bonus = bonus;
+        this.tunjangan = tunjangan;
+    }
+    
+    @Override
+    double hitungGaji() {
+        return gajiPokok + bonus + tunjangan;
+    }
+    
+    @Override
+    void tampilkan() {
+        System.out.println("\n--- MANAGER ---");
+        System.out.println("Nama       : " + nama);
+        System.out.println("Departemen : " + departemen);
+        System.out.println("Gaji Pokok : Rp " + gajiPokok);
+        System.out.println("Bonus      : Rp " + bonus);
+        System.out.println("Tunjangan  : Rp " + tunjangan);
+        System.out.println("Total Gaji : Rp " + hitungGaji());
+    }
+}
+
+// Subclass Karyawan
+class Karyawan extends Manager {
+    double lembur;
+    
+    Karyawan(String nama, String departemen, double gajiPokok, double lembur) {
+        super(nama, departemen, gajiPokok);
+        this.lembur = lembur;
+    }
+    
+    @Override
+    double hitungGaji() {
+        return gajiPokok + lembur;
+    }
+    
+    @Override
+    void tampilkan() {
+        System.out.println("\n--- KARYAWAN ---");
+        System.out.println("Nama       : " + nama);
+        System.out.println("Departemen : " + departemen);
+        System.out.println("Gaji Pokok : Rp " + gajiPokok);
+        System.out.println("Lembur     : Rp " + lembur);
+        System.out.println("Total Gaji : Rp " + hitungGaji());
+    }
+}
+
+// Main Program
+public class Main {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        Manager pegawai = null;
+        
+        System.out.println("=================================");
+        System.out.println("  SISTEM PENGGAJIAN KARYAWAN");
+        System.out.println("=================================");
+        
+        // Pemilihan Jenis Karyawan
+        System.out.println("\nPilih jenis karyawan:");
+        System.out.println("1. Manager");
+        System.out.println("2. Karyawan Biasa");
+        System.out.print("Pilihan (1/2): ");
+        int pilihan = input.nextInt();
+        input.nextLine();
+        
+        // Input berdasarkan pilihan
+        if (pilihan == 1) {
+            System.out.println("\n--- INPUT DATA MANAGER ---");
+            System.out.print("Nama       : ");
+            String nama = input.nextLine();
+            System.out.print("Departemen : ");
+            String dept = input.nextLine();
+            System.out.print("Gaji Pokok : ");
+            double gaji = input.nextDouble();
+            System.out.print("Bonus      : ");
+            double bonus = input.nextDouble();
+            System.out.print("Tunjangan  : ");
+            double tunjangan = input.nextDouble();
+            
+            pegawai = new ManagerLevel(nama, dept, gaji, bonus, tunjangan);
+            
+        } else if (pilihan == 2) {
+            System.out.println("\n--- INPUT DATA KARYAWAN ---");
+            System.out.print("Nama       : ");
+            String nama = input.nextLine();
+            System.out.print("Departemen : ");
+            String dept = input.nextLine();
+            System.out.print("Gaji Pokok : ");
+            double gaji = input.nextDouble();
+            System.out.print("Lembur     : ");
+            double lembur = input.nextDouble();
+            
+            pegawai = new Karyawan(nama, dept, gaji, lembur);
+            
+        } else {
+            System.out.println("\nPilihan tidak valid!");
+            input.close();
+            return;
+        }
+        
+        // Tampilkan Data (Polymorphism)
+        System.out.println("\n=================================");
+        System.out.println("  HASIL PERHITUNGAN GAJI");
+        System.out.println("=================================");
+        
+        pegawai.tampilkan();
+        
+        System.out.println("\n=================================");
+        System.out.println("Total Gaji: Rp " + pegawai.hitungGaji());
+        System.out.println("=================================");
+        
+        input.close();
+    }
+}
